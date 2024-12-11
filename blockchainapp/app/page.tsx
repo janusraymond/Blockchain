@@ -69,7 +69,7 @@ export default function Home() {
     }
   };
 
-  const sendMessage = async (message: string) => {
+  const sendMsg = async (message: string) => {
     const ethereum = window.ethereum;
     if (!ethereum) {
       alert("Ethereum wallet not detected.");
@@ -96,7 +96,7 @@ export default function Home() {
     const signer = await provider.getSigner();
     const contract = getContract(signer);
     try {
-      const interest = await contract.getMessage(walletKey);
+      const interest = await contract.getMessages(walletKey);
       alert(`Accumulated Interest: ${interest}`);
     } catch (error) {
       alert(`Fetching failed: ${error}`);
@@ -119,7 +119,7 @@ export default function Home() {
                 <button
                   onClick={() => {
                     {walletKey !== "" && (
-                      sendMessage(message)
+                      sendMsg(message)
                     )}
                     {walletKey === "" && connectWallet()}
                   }}
